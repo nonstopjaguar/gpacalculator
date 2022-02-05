@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>General Average Calculator</title>
+		<link href="calc.css" rel="stylesheet" />
+		<link href="calibre.css" rel="stylesheet" />
+	
+		<style>
+			table {
+    margin: 0 auto;
+	border-collapse: separate;
+    border-spacing: 0;
+    min-width: 150px;
+  }
+  
+  
+		</style>
+	
+	<script type="text/javascript">
+		var subject = 0;
+		var ave = 0;		
+	
+		function subjectSelect()
+		{
+			subject = document.getElementById("subject").selectedIndex;
+			var table = "<table id='grades' class='center'><tr><td class='gradeTitle text-center'><b>Subject Units</b></td><td class='gradeTitle text-center'><b>Subject Grade</b></td><tr>";
+			
+			for(var i = 0; i < subject; i++)
+			{
+				table = table + "<tr><td class='gradeContents text-center'>" +
+				"<input id='unit" + i + "' type='text' size = '2'>" +
+				"</td><td class='gradeContents text-center'>" +
+				"<input id='grade" + i + "' type='text' size='2'>" +
+				"</td></tr>";
+			}
+			
+			var table = table + "</table>" +
+				"<br><input type='button' class='btn-getstarted btn positionss' value='SUBMIT' onclick='compute()'>";
+			
+			document.getElementById("tableWrap").innerHTML = table;
+		}
+		
+		function compute()
+		{
+			var lunit = 0;
+			
+			for(var i = 0; i < subject; i++)
+			{
+				var units = parseFloat(document.getElementById('unit' + i).value);
+				var grades = parseFloat(document.getElementById('grade' + i).value);
+				
+				lunit += units;
+				ave += units * grades;
+			}
+			
+			ave = ave / lunit;
+			ave = Math.round(ave * 1000) / 1000;
+			document.getElementById('ave').innerHTML = "Your General Point Average for this term is " + ave + ".";
+			
+			ave = 0;
+		}
+	</script>
+</head>
+<body>
+	
+	<div class="container application-card text-center" id="wrapper">
+		<h2 class="positionn" style="font-size: 45px;">General Point Average Calculator</h2>
+		<h3 class="positionn" style="font-size: 24px;">Subject Count:</h3>
+		<select id="subject" onchange="subjectSelect();" style="border-radius: 25px; width: 30;">
+			<option></option>
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+			<option>5</option>
+			<option>6</option>
+			<option>7</option>
+			<option>8</option>
+			<option>9</option>
+			<option>10</option>
+			<option>11</option>
+			<option>12</option>
+			<option>13</option>
+			<option>14</option>
+			<option>15</option>
+		</select>
+		<br>
+		<span class="positionn" style="font-size: 14px;"><i>Don't include non-subjects like "NSTP".</i></span>
+		<br><br>
+		
+		<div id="tableWrap" class="text-center">		
+		</div>
+		<br><br>
+		<h3 id="ave" class="text-center" style="color: #3D4DA3;"></h3>
+	
+	</div>
+	
+</body>
+</html>
